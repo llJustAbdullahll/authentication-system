@@ -23,9 +23,9 @@ class LoginController extends Controller
             return back()->with('error', 'Invalid Credientials!');
         }
 
-        if(!$user->email_verified_at){
+        if(!$user->account_verified_at){
            Mail::to($user->email)->send(new VerifyAccountMail($user->otp, $user->email));
-           return redirect()->route('email.verify', $user->email); 
+           return redirect()->route('account.verify', $user->email); 
         }
 
        Auth::login($user);

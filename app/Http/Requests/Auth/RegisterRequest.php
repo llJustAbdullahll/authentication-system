@@ -16,8 +16,15 @@ class RegisterRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|unique:users,email',
-            'phone' => 'nullable|string|unique:users,phone|regex:/^01[0,1,2,5][0-9]{8}$/',
+            'phone' => 'nullable|string|unique:users,phone|phone:AUTO',
             'password' => 'required|string|min:6|confirmed',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'phone.phone' => 'Invalid phone number format'
         ];
     }
 }
