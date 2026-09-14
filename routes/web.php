@@ -47,10 +47,12 @@ Route::view('/verify-account/{identifier}', 'auth.verify-account')->name('accoun
 Route::post('/verify-account', [VerifyAccountController::class, 'verifyOtp']);
 Route::post('/send-verification-otp', [VerifyAccountController::class, 'sendOtp']);
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'auth.session'])->group(function () {
   // PROFILE ROUTES
   Route::view('/profile', 'auth.profile'); 
   Route::put('/profile', UpdateProfileController::class); 
-  Route::post('/logout', LogoutController::class)->name('logout');
   Route::post('change-password', ChangePasswordController::class);
+  
+  // LOGOUT ROUTES
+  Route::post('/logout', LogoutController::class)->name('logout');
 });

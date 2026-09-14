@@ -13,7 +13,11 @@ class UpdateProfileController extends Controller
     public function __invoke(UpdateProfileRequest $request)
     {
         $user = User::find(Auth::id());
-        $user->update($request->validated());
+
+        $data = $request->validated();
+        $data['logout_other_devices'] = $request->has('logout_other_devices') ? true : false;
+        $user->update($data);
+
         return back()->with('success', 'Profile updated successfully');
     }
 }
