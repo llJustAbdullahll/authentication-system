@@ -13,6 +13,7 @@ use App\Http\Controllers\Auth\MagicLoginController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\UpdateProfileController;
 use App\Http\Controllers\Auth\VerifyAccountController;
+use App\Models\Session;
 
 Route::view('/', 'index');
 
@@ -54,5 +55,6 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
   Route::post('change-password', ChangePasswordController::class);
   
   // LOGOUT ROUTES
-  Route::post('/logout', LogoutController::class)->name('logout');
+  Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+  Route::post('/logout/{session}', [LogoutController::class, 'logoutDevice'])->name('logout_device');
 });
