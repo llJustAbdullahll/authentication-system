@@ -28,10 +28,10 @@ class LoginController extends Controller
            return redirect()->route('account.verify', $user->email); 
         }
 
-       Auth::login($user);
-       if($user->logout_other_devices) {
+        Auth::login($user, $request->filled('remember'));
+        if($user->logout_other_devices) {
           Auth::logoutOtherDevices($request->password);
-       }
+        }
 
        return redirect()->intended('/profile')->with('success', 'You are in');
      }

@@ -34,17 +34,24 @@
         @enderror
       </div>
       <p class="mt-4 text-sm">Forgot your passsword? <a href="{{route("password.request")}}" class="text-blue-400 hover:underline">Reset now</a></p>
+      
+      <div class="flex items-center mb-4">
+          <input type="checkbox" name="remember" id="remember">
+          <label for="remember" class="block text-gray-300 ml-1">Remember Me</label>
+          @error('remember')
+              <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
+          @enderror
+      </div>
+      
       <button type="submit" class="w-full py-3 mt-4 bg-blue-600 rounded-lg font-semibold text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Login</button>
-      <p class="mt-4 text-sm">Passwordless Login? <a href="{{url('/login/magic')}}" class="text-blue-400 hover:underline">Reset now</a></p>
+      
+      <p class="mt-4 text-sm">Login without password? <a href="{{route("login.magic")}}" class="text-blue-400 hover:underline">Login now</a></p>
       <!-- Social Login Buttons Row -->
       <div class="flex justify-between mt-4">
         @foreach (config('social.providers') as $provider)
-          <a href="{{ url($provider['url']) }}" class="flex items-center   
-          justify-center w-1/2 py-3 bg-{{ $provider['color'] }}-500 rounded-lg 
-          font-semibold text-white hover:bg-{{ $provider['color'] }}-600 
-          focus:outline-none focus:ring-2 focus:ring-{{ $provider['color'] }}-500 mr-2">
-            <i class="{{ $provider['icon'] }} fa-lg mr-3"></i>
-            {{ $provider['name'] }}
+          <a href="{{ url($provider['url']) }}" class="flex items-center justify-center w-1/3 py-3 bg-{{$provider['color']}}-500 rounded-lg font-semibold text-white hover:bg-{{$provider['color']}}-600 focus:outline-none focus:ring-2 focus:ring-{{$provider['color']}}-500 mr-2">
+            <i class="{{$provider['icon']}} fa-lg mr-3"></i>
+            {{$provider['name']}}
           </a>
         @endforeach
       </div>
