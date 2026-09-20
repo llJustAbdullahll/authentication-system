@@ -11,6 +11,7 @@ class RegisterRequest extends FormRequest
     {
         return true;
     }
+
     public function rules(): array
     {
         return [
@@ -18,6 +19,7 @@ class RegisterRequest extends FormRequest
             'email' => 'required|string|email|unique:users,email',
             'phone' => 'nullable|string|unique:users,phone|phone:AUTO',
             'password' => 'required|string|min:6|confirmed',
+            'g-recaptcha-response' => 'required|captcha',
         ];
     }
 
