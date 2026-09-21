@@ -33,6 +33,11 @@ class LoginController extends Controller
           Auth::logoutOtherDevices($request->password);
         }
 
-       return redirect()->intended('/profile')->with('success', 'You are in');
+        $urls = [
+          'student' => '/student',
+          'teacher' => '/teacher',
+        ];
+
+       return redirect()->intended($urls[$user->role] ?? '/profile')->with('success', 'You are in');
      }
 }

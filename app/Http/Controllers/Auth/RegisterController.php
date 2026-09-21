@@ -18,11 +18,12 @@ class RegisterController extends Controller
         $user = User::create([ 
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password), 
             'phone' => $request->phone,
+            'role' => $request->role,
+            'password' => Hash::make($request->password), 
             'otp' => rand(100000, 999999)
         ]);
-
+        
         Mail::to($user->email)->send(new VerifyAccountMail($user->otp, $user->email));
 
         return redirect()->route('account.verify', $user->email); 
