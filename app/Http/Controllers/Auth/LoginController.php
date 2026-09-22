@@ -38,6 +38,6 @@ class LoginController extends Controller
           'teacher' => '/teacher',
         ];
 
-       return redirect()->intended($urls[$user->role] ?? '/profile')->with('success', 'You are in');
+       return redirect()->intended($urls[$user->role])->with('success', 'You are in');
      }
 }
