@@ -39,6 +39,6 @@ class LoginController extends Controller
           'admin' => '/admin',
         ];
 
-       return redirect()->intended($urls[$user->role ?? '/profile'])->with('success', 'You are in');
+       return redirect()->intended($urls[$user->role] ?? '/profile')->with('success', 'You are in');
      }
 }

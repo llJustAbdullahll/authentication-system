@@ -18,7 +18,7 @@
     <form action="{{url('register')}}" method="POST" id="register-form" class="space-y-4">
       @csrf
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div>
+        <div class="col-span-2">
           <label for="name" class="block mb-2 text-sm font-medium">Name</label>
           <input type="text" id="name" name="name" autofocus autocomplete="name" value="{{old('name')}}" class="w-full p-3 rounded bg-gray-700 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
           @error('name')
@@ -36,16 +36,6 @@
           <label for="phone" class="block mb-2 text-sm font-medium">Phone</label>
           <input type="text" id="phone" name="phone" autocomplete="off" value="{{old('phone')}}" class="w-full p-3 rounded bg-gray-700 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
           @error('phone')
-              <span class="text-red-500 text-sm mt-1">{{$message}}</span>
-          @enderror
-        </div>
-        <div>
-          <label for="role" class="block mb-2 text-sm font-medium">Role</label>
-          <select name="role" id="role" class="w-full p-3 rounded bg-gray-700 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <option value="student" {{old('role') == 'student' ? 'selected' : ''}}>Student</option>
-            <option value="teacher" {{old('role') == 'teacher' ? 'selected' : ''}}>Teacher</option>
-          </select>
-          @error('role')
               <span class="text-red-500 text-sm mt-1">{{$message}}</span>
           @enderror
         </div>

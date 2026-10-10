@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\RolesController;
+use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Auth\ChangePasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\GithubAuthController;
@@ -59,9 +61,11 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
   Route::post('/logout/{session}', [LogoutController::class, 'logoutDevice'])->name('logout_device');
 
   // PAGE ROUTES
-  Route::view('/student', 'pages.student')->middleware('role:student');
-  Route::view('/teacher', 'pages.teacher')->middleware('role:teacher');
-  Route::view('/admin', 'pages.admin')->middleware('role:admin');
+  Route::view('/student', 'pages.student')->middleware('role:Student');
+  Route::view('/teacher', 'pages.teacher')->middleware('role:Teacher');
+  Route::view('/admin', 'pages.admin')->middleware('role:Admin');
 });
 
-
+Route::get('users', [UsersController::class, 'index']);
+Route::get('users/{user}/change-role', [UsersController::class, 'changeRole']);
+Route::resource('roles', RolesController::class);
